@@ -1,0 +1,6 @@
+@StockTicker.ServerSentEvents_HostAddress = http://localhost:5098
+
+GET {{StockTicker.ServerSentEvents_HostAddress}}/ServerSendEvents/
+Accept: application/json
+
+###

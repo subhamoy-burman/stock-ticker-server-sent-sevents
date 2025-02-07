@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Stock Market Ticker</h1>
+    <div id="ticker"></div>
+
+    <script>
+        const eventSource = new EventSource("https://localhost:44333/ServerSendEvents");
+
+        eventSource.onmessage = function (event) {
+            console.log("New event:", event.data);
+            const tickerDiv = document.getElementById("ticker");
+
+            // Create a new div element for each update
+            const newUpdate = document.createElement("div");
+            newUpdate.textContent = `Current Stock Price: ${event.data}`;
+
+            // Append the new update to the ticker container
+            tickerDiv.appendChild(newUpdate);
+        };
+
+        eventSource.onerror = function (event) {
+            console.error("EventSource failed:", event);
+        };
+    </script>
+</body>
+</html>
